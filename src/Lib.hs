@@ -13,7 +13,7 @@ import Data.List.NonEmpty (toList)
 import Data.Maybe (catMaybes, mapMaybe)
 import Data.Org (OrgDoc, OrgFile (orgDoc), Priority (priority), Section (sectionPriority), Todo (TODO), Words (Bold, Highlight, Image, Italic, Link, Plain, Punct, Strike, Underline, Verbatim), docSections, org, sectionDoc, sectionHeading, sectionTodo)
 import Data.Text (Text, empty, singleton)
-import Data.Text qualified as T (concat)
+import Data.Text qualified as T (intercalate)
 import Data.Text.IO qualified as TIO (readFile)
 import GHC.Generics (Generic)
 import System.Directory (getDirectoryContents)
@@ -58,7 +58,7 @@ flattenWord (Punct x) = singleton x
 flattenWord (Plain x) = x
 
 flattenWords :: [Words] -> Text
-flattenWords = T.concat . map flattenWord
+flattenWords ws = T.intercalate (singleton ' ') $ map flattenWord ws
 
 extractSections :: OrgDoc -> [Section]
 extractSections doc = docSections doc ++ concatMap (extractSections . sectionDoc) (docSections doc)

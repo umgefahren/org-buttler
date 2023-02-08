@@ -14,5 +14,5 @@ WORKDIR /root/
 
 COPY --from=builder /root/.local/bin/org-buttler-exe ./
 
-EXPOSE 3000
-ENTRYPOINT [ "./org-buttler-exe" ]
+EXPOSE 3030
+ENTRYPOINT [ "/root/org-buttler-exe" ]

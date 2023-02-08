@@ -13,7 +13,7 @@ import System.Environment (getEnv)
 
 main :: IO ()
 main = do
-  let port = 3000
+  let port = 3030
   putStrLn $ "Listening on port " ++ show port
   run port app
 
