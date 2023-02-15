@@ -1,4 +1,4 @@
-FROM haskell:9.2 AS builder
+FROM haskell:9.2
 
 RUN mkdir /tmp/build
 WORKDIR /tmp/build
@@ -7,12 +7,6 @@ COPY . .
 
 RUN stack install --resolver lts-20.10
 
-
-FROM debian:10-slim
-
-WORKDIR /root/
-
-COPY --from=builder /root/.local/bin/org-buttler-exe ./
-
+ENV ORGDIR=/tmp/org/
 EXPOSE 3030
-ENTRYPOINT [ "/root/org-buttler-exe" ]
+ENTRYPOINT [ "/root/.local/bin/org-buttler-exe" ]
